@@ -1,58 +1,5 @@
 # Overall System Architecture
 
-This document provides two views of the system architecture: a simplified overview for quick understanding and a detailed diagram showing all components and connections.
-
-## Architecture Overview
-
-The following diagram provides a high-level view of the main architectural layers and their relationships:
-
-```mermaid
-graph TD
-    Clients[Clients]
-    Edge[Edge Layer]
-    API[API Layer]
-    Core[Core Services]
-    Data[Data Layer]
-    Messaging[Messaging]
-    External[External Services]
-    Observability[Observability]
-
-    Clients --> Edge
-    Edge --> API
-    API --> Core
-    Core --> Data
-    Core --> Messaging
-    Core --> External
-    Messaging --> Core
-    
-    Core -.-> Observability
-    API -.-> Observability
-    Messaging -.-> Observability
-
-    %% Layer color definitions
-    classDef clients fill:#E3F2FD,stroke:#1565C0,stroke-width:2px,color:#0D47A1
-    classDef edge fill:#FFF3E0,stroke:#EF6C00,stroke-width:2px,color:#E65100
-    classDef api fill:#F3E5F5,stroke:#7B1FA2,stroke-width:2px,color:#4A148C
-    classDef core fill:#E8F5E9,stroke:#2E7D32,stroke-width:2px,color:#1B5E20
-    classDef data fill:#FBE9E7,stroke:#D84315,stroke-width:2px,color:#BF360C
-    classDef messaging fill:#E0F7FA,stroke:#00838F,stroke-width:2px,color:#006064
-    classDef external fill:#FFF8E1,stroke:#F9A825,stroke-width:2px,color:#F57F17
-    classDef observability fill:#F5F5F5,stroke:#616161,stroke-width:2px,color:#212121
-
-    class Clients clients
-    class Edge edge
-    class API api
-    class Core core
-    class Data data
-    class Messaging messaging
-    class External external
-    class Observability observability
-```
-
-## Detailed Architecture
-
-The following diagram shows all components, their connections, and the detailed structure of each layer:
-
 ```mermaid
 graph TD
     subgraph Clients
@@ -162,40 +109,6 @@ graph TD
     UserService -.-> Jaeger
     OrderService -.-> Jaeger
     Kafka -.-> ELK
-
-    %% Component color definitions
-    classDef clients fill:#E3F2FD,stroke:#1565C0,stroke-width:2px,color:#0D47A1
-    classDef edge fill:#FFF3E0,stroke:#EF6C00,stroke-width:2px,color:#E65100
-    classDef api fill:#F3E5F5,stroke:#7B1FA2,stroke-width:2px,color:#4A148C
-    classDef core fill:#E8F5E9,stroke:#2E7D32,stroke-width:2px,color:#1B5E20
-    classDef data fill:#FBE9E7,stroke:#D84315,stroke-width:2px,color:#BF360C
-    classDef messaging fill:#E0F7FA,stroke:#00838F,stroke-width:2px,color:#006064
-    classDef external fill:#FFF8E1,stroke:#F9A825,stroke-width:2px,color:#F57F17
-    classDef observability fill:#F5F5F5,stroke:#616161,stroke-width:2px,color:#212121
-
-    %% Apply styles to Clients components
-    class Web,Mobile,ThirdParty clients
-
-    %% Apply styles to Edge Layer components
-    class CDN,LB,WAF edge
-
-    %% Apply styles to API Layer components
-    class APIGateway,RateLimiter,Auth,AuthZ api
-
-    %% Apply styles to Core Services components
-    class UserService,OrderService,PaymentService,NotificationService,SearchService,InventoryService core
-
-    %% Apply styles to Data Layer components
-    class PostgresDB,ReadReplica,MongoDB,Redis,Elasticsearch data
-
-    %% Apply styles to Messaging components
-    class Kafka,DeadLetter messaging
-
-    %% Apply styles to External Services components
-    class PaymentGateway,EmailProvider,SMSProvider,CloudStorage external
-
-    %% Apply styles to Observability components
-    class Prometheus,Grafana,Jaeger,ELK observability
 ```
 
 ## Architecture Components
